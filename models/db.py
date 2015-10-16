@@ -92,13 +92,17 @@ auth.settings.reset_password_requires_verification = True
 # auth.enable_record_versioning(db)
 
 db.define_table('tags',
-                Field('direccion'),
-                Field('nombre',label="nombre señal"),
-                Format='%(nombre)s',
-                )
+    Field('direccion'),
+    Field('nombre',label="Nombre señal"),
+    format='%(nombre)s'    
+    )
+    
+
 db.define_table('lecturas',
-                Field('tag', db.tags),
-                Field('valor','integer'),
-                Field('fecha','datetime'),
-                )
+    Field('tag',db.tags),
+    Field('valor','integer'),
+    Field('fecha','datetime'),
+    format='%(tag)s - %(valor)s - %(fecha)s'
+    )
+
 db.lecturas.id.readable=False

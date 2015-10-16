@@ -1,3 +1,50 @@
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
+
+#########################################################################
+## This is a sample controller
+## - index is the default action of any application
+## - user is required for authentication and authorization
+## - download is for downloading files uploaded in the db (does streaming)
+#########################################################################
+@auth.requires_login()
+def index():
+    
+    rejilla = SQLFORM.grid(db.lecturas,  searchable=False, 
+    details=False, csv=False)
+
+    return dict(lecturas=rejilla)
+
+
+@auth.requires_login()
+def etiquetas():
+    
+    rejilla = SQLFORM.grid(db.tags,details=False, csv=False)
+
+    return dict(lecturas=rejilla)
+    
+    
+def valoresuna():
+    etiqueta=db(db.tags.nombre=="Q1").select().first()
+    
+    filas = db(db.lecturas.tag == etiqueta.id).select()
+    
+    
+    return dict(datos=filas)
+
+
+
+def valoresparom1():
+    etiqueta=db(db.tags.nombre=="I1").select().first()
+    
+    filas=db(db.lecturas.tag==etiqueta.id).select()
+    
+    
+    return dict(datos=filas)
+    
+    
+
+
 def user():
     """
     exposes:
@@ -34,16 +81,3 @@ def call():
     supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
     """
     return service()
-
-
-# -*- coding: utf-8 -*-
-# this file is released under public domain and you can use without limitations
-
-
-def index():
-     grid = SQLFORM.grid(db.lecturas,searchable=False)
-     return dict(datos=grid)
-    
-    
-
-

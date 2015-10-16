@@ -25,7 +25,14 @@ response.google_analytics_id = None
 #########################################################################
 
 response.menu = [
-    (T('Home'), False, URL('default', 'index'), [])
+    ('Valores', True, URL('default', 'index'), [
+        ('Todos', False, URL('default', 'index'), []),
+        ('Q1', False, URL('default', 'valoresuna'), []),
+        ('Paro Motor 1', False, URL('default', 'valoresparom1'), []),
+    
+    ]),
+    ('Etiquetas', False, URL('default', 'etiquetas'), []),
+
 ]
 
 DEVELOPMENT_MENU = True
